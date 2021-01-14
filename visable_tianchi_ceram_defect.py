@@ -44,7 +44,7 @@ def vis_tianchi_ceram(json_file, src_dir, dst_dir):
         bboxes = [[elem[0], elem[1], elem[2], elem[3]] for elem in bboxes]
 
         drawed = vis_bboxes(image, bboxes)
-        image = concat_images_3channle(image, drawed)
+        image = concat_images_3channle([image, drawed])
         dst_path = os.path.join(dst_dir, name)
         cv2.imwrite(dst_path, image)
 
