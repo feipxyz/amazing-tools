@@ -4,13 +4,17 @@
 """
 
 import cv2
-from matplotlib.pyplot import connect
+from matplotlib.pyplot import connect, draw
 import numpy as np
 import argparse
 import json
 import os
 from vis import (
     vis_bboxes
+)
+
+from image_tools import (
+    concat_images_3channle
 )
 
 def vis_tianchi_ceram(json_file, src_dir, dst_dir):
@@ -39,7 +43,8 @@ def vis_tianchi_ceram(json_file, src_dir, dst_dir):
         image = cv2.imread(image_path)
         bboxes = [[elem[0], elem[1], elem[2], elem[3]] for elem in bboxes]
 
-        image = vis_bboxes(image, bboxes)
+        drawed = vis_bboxes(image, bboxes)
+        image = concat_images_3channle(image, drawed)
         dst_path = os.path.join(dst_dir, name)
         cv2.imwrite(dst_path, image)
 

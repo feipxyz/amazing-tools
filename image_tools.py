@@ -272,6 +272,24 @@ class ImageTools(object):
         return mat_rotation, width_new, height_new
 
 
+def concat_images_3channle(images):
+    max_height = 0 
+    max_width = 0
+    for image in images:
+        height, width, _ = image.shape
+        max_height = max(height, max_height)
+        max_width = max_width + width
+
+    res = np.zeros((max_height, max_width, 3), np.uint8)
+    cur_len = 0
+    for image in images:
+        height, width, _ = image.shape
+        res[0:height, cur_len:cur_len+width, :] = image
+        cur_len = cur_len + width
+
+    return res 
+
+
 if __name__ == "__main__":
     img_tool = ImageTools()
     # image_path = "/Users/feipeng/Pictures/cat.jpg"
