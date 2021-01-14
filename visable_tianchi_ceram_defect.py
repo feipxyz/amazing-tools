@@ -25,11 +25,12 @@ def vis_tianchi_ceram(json_file, src_dir, dst_dir):
 
     info = dict()
     for item in content:
-        bbox = item['bbox']
+        box = item['bbox']
         name = item['name']
         category = item['category']
 
         bboxes = info.get(name, [])
+        bbox = [box[0], box[1], box[2] - box[0], box[3] - box[1]]
         bboxes.append([*bbox, category])
         info[name] = bboxes
 
@@ -47,7 +48,7 @@ def vis_tianchi_ceram(json_file, src_dir, dst_dir):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser("ONNX Location Demo")
+    parser = argparse.ArgumentParser("demo")
     parser.add_argument('-l', '--label_file', type=str, default=None, help='label file')
     parser.add_argument('-s', '--src_dir', type=str, default=None, help='image_dir')
     parser.add_argument('-d', '--dst_dir', type=str, default=None, help='output dir')
