@@ -14,6 +14,9 @@ from vis import (
 )
 
 def vis_tianchi_ceram(json_file, src_dir, dst_dir):
+    if not os.path.exists(dst_dir):
+        os.makedirs(dst_dir)
+
     fr = open(json_file, 'r')
     content = json.load(fr)
     fr.close()
